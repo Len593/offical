@@ -10,39 +10,47 @@
         <!-- 桌面端导航 -->
         <nav class="nav-desktop">
           <ul class="nav-list">
-            <li><a href="#home" class="nav-link">Início</a></li>
-            <li><a href="#about" class="nav-link">Sobre</a></li>
-            <li><a href="#services" class="nav-link">Serviços</a></li>
+            <li><div class="nav-link" :class="{active: activeSection==='/'}" @click="toPath('/')">Início</div></li>
+            <li><div class="nav-link" :class="{active: activeSection==='/about'}" @click="toPath('/about')">Sobre</div></li>
+            <li><div class="nav-link" :class="{active: activeSection==='/services'}" @click="toPath('/services')">Serviços</div></li>
           </ul>
         </nav>
 
         <!-- 移动端菜单按钮 -->
         <button class="mobile-menu-btn" @click="toggleMobileMenu">
-          <span class="hamburger" :class="{ 'active': isMobileMenuOpen }"></span>
+          <img src="./img/close.svg" alt="menu" class="close-icon" v-if="isMobileMenuOpen" />
+          <img src="./img/more.svg" alt="menu" class="close-icon" v-else />
         </button>
       </div>
 
       <!-- 移动端导航 -->
-              <nav class="nav-mobile" :class="{ 'nav-mobile-open': isMobileMenuOpen }">
-          <ul class="nav-mobile-list">
-            <li><a href="#home" class="nav-mobile-link" @click="closeMobileMenu">Início</a></li>
-            <li><a href="#about" class="nav-mobile-link" @click="closeMobileMenu">Sobre</a></li>
-            <li><a href="#services" class="nav-mobile-link" @click="closeMobileMenu">Serviços</a></li>
-            <li><a href="#contact" class="nav-mobile-link" @click="closeMobileMenu">Contato</a></li>
-          </ul>
-        </nav>
+      <nav class="nav-mobile" :class="{ 'nav-mobile-open': isMobileMenuOpen }">
+        <ul class="nav-mobile-list">
+          <li><div class="nav-mobile-link" :class="{active: activeSection==='/'}" @click="toPath('/')">Início</div></li>
+          <li><div class="nav-mobile-link" :class="{active: activeSection==='/about'}" @click="toPath('/about')">Sobre</div></li>
+          <li><div class="nav-mobile-link" :class="{active: activeSection==='/services'}" @click="toPath('/services')">Serviços</div></li>
+        </ul>
+      </nav>
     </div>
   </header>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const isScrolled = ref(false)
 const isMobileMenuOpen = ref(false)
+const activeSection = computed(() => {
+  return router.currentRoute.value.path
+})
 
-const handleScroll = () => {
-  isScrolled.value = window.scrollY > 50
+const toPath = (path) => {
+  window.scrollTo(0, 0)
+  router.push(path)
+  closeMobileMenu()
 }
 
 const toggleMobileMenu = () => {
@@ -60,14 +68,6 @@ const closeMobileMenu = () => {
   document.body.style.overflow = ''
 }
 
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-  document.body.style.overflow = ''
-})
 </script>
 
 <style scoped>
@@ -132,6 +132,7 @@ onUnmounted(() => {
   font-size: 0.95rem;
   transition: color 0.3s ease;
   position: relative;
+  cursor: pointer;
 }
 
 .nav-link:hover {
@@ -162,45 +163,11 @@ onUnmounted(() => {
   padding: 10px;
 }
 
-.hamburger {
+.close-icon {
   display: block;
-  width: 25px;
-  height: 3px;
-  background: #333;
-  position: relative;
+  width: 20px;
+  height: 20px;
   transition: all 0.3s ease;
-}
-
-.hamburger::before,
-.hamburger::after {
-  content: '';
-  position: absolute;
-  width: 25px;
-  height: 3px;
-  background: #333;
-  transition: all 0.3s ease;
-}
-
-.hamburger::before {
-  top: -8px;
-}
-
-.hamburger::after {
-  bottom: -8px;
-}
-
-.hamburger.active {
-  background: transparent;
-}
-
-.hamburger.active::before {
-  transform: rotate(45deg);
-  top: 0;
-}
-
-.hamburger.active::after {
-  transform: rotate(-45deg);
-  bottom: 0;
 }
 
 /* 移动端导航 */
@@ -280,5 +247,14 @@ onUnmounted(() => {
   .logo img {
     height: 30px;
   }
+}
+
+.nav-link.active,
+.nav-mobile-link.active {
+  color: #c49a6c;
+}
+.nav-link.active::after {
+  width: 100%;
+  background: #c49a6c;
 }
 </style>

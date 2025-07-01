@@ -7,6 +7,11 @@ const routes = [
     component: () => import('@/views/home/index.vue')
   },
   {
+    path: '/about',
+    name: 'About',
+    component: () => import('@/views/about/about.vue')
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: '404',
     component: () => import('@/views/home/index.vue')

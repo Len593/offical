@@ -1,224 +1,207 @@
 <template>
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <div class="footer-logo">
-            <img src="@/assets/img/logo.svg" alt="Hit Invest Capital" />
+    <!-- 联系我们 -->
+    <section class="contact scroll-fade-up">
+      <div class="container">
+        <div class="contact-row scroll-fade-up">
+          <div class="contact-left scroll-fade-up">
+            <h2 class="scroll-fade-up">Investimentos</h2>
+            <p class="scroll-fade-up">Sua confiança é nossa prioridade em finanças.</p>
           </div>
-          <p class="footer-description">
-            Soluções financeiras confiáveis para maximizar seus investimentos na bolsa de valores brasileira.
-          </p>
-        </div>
-
-        <div class="footer-section">
-          <h3>Links Rápidos</h3>
-          <ul class="footer-links">
-            <li><a href="#home">Início</a></li>
-            <li><a href="#about">Sobre</a></li>
-            <li><a href="#services">Serviços</a></li>
-            <li><a href="#contact">Contato</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h3>Serviços</h3>
-          <ul class="footer-links">
-            <li><a href="#consulting">Consultoria</a></li>
-            <li><a href="#education">Educação Financeira</a></li>
-            <li><a href="#analysis">Análise de Mercado</a></li>
-            <li><a href="#management">Gestão de Ativos</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-section">
-          <h3>Contato</h3>
-          <div class="contact-info">
-            <div class="contact-item">
-              <span class="contact-icon">📧</span>
-              <span>hitinvestcapital@outlook.com</span>
+          <div class="contact-divider scroll-fade-up"></div>
+          <div class="contact-right scroll-fade-up">
+            <div class="contact-label scroll-fade-up">CONTATO</div>
+            <div class="contact-info-row scroll-fade-up">
+              <span class="icon scroll-fade-up">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" rx="4" fill="none"/><path d="M3.5 6.5L10 11.5L16.5 6.5" stroke="#c49a6c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="3.5" y="6.5" width="13" height="7" rx="2" stroke="#c49a6c" stroke-width="1.5"/></svg>
+              </span>
+              hitinvestcapital@outlook.com
             </div>
-            <div class="contact-item">
-              <span class="contact-icon">📞</span>
-              <span>（11）98715-1324</span>
-            </div>
-            <div class="contact-item">
-              <span class="contact-icon">📍</span>
-              <span>São Paulo, Brasil</span>
+            <div class="contact-info-row scroll-fade-up">
+              <span class="icon scroll-fade-up">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" rx="4" fill="none"/><path d="M6.5 4.5C6.5 3.94772 6.94772 3.5 7.5 3.5H12.5C13.0523 3.5 13.5 3.94772 13.5 4.5V5.5C13.5 6.05228 13.0523 6.5 12.5 6.5H7.5C6.94772 6.5 6.5 6.05228 6.5 5.5V4.5Z" stroke="#c49a6c" stroke-width="1.5"/><path d="M10 13.5V15.5" stroke="#c49a6c" stroke-width="1.5" stroke-linecap="round"/><path d="M7.5 6.5V15.5C7.5 16.0523 7.94772 16.5 8.5 16.5H11.5C12.0523 16.5 12.5 16.0523 12.5 15.5V6.5" stroke="#c49a6c" stroke-width="1.5"/></svg>
+              </span>
+              (11) 98715-1324
             </div>
           </div>
         </div>
       </div>
-
-      <div class="footer-bottom">
-        <div class="footer-bottom-content">
-          <p>&copy; 2020. All rights reserved.</p>
-          <div class="social-links">
-            <a href="#" class="social-link">LinkedIn</a>
-            <a href="#" class="social-link">Twitter</a>
-            <a href="#" class="social-link">Facebook</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    </section>
+  <footer class="footer-minimal scroll-fade-up">
+    <div class="footer-divider"></div>
+    <div class="footer-copyright">© 2020. All rights reserved.</div>
   </footer>
 </template>
 
 <script setup>
-// 页脚组件逻辑
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  // 添加滚动动画
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in')
+      }
+    })
+  }, observerOptions)
+
+  // 观察所有需要动画的元素
+  const animateElements = document.querySelectorAll('.scroll-fade-up')
+  animateElements.forEach(el => observer.observe(el))
+})
 </script>
 
-<style scoped>
-.footer {
-  background: #1a1a1a;
-  color: white;
-  padding: 50px 0 20px;
+<style>
+.scroll-fade-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.animate-in {
+  opacity: 1 !important;
+  transform: none !important;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
-}
-
-.footer-content {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  margin-bottom: 30px;
-}
-
-.footer-section h3 {
-  font-size: 1.1rem;
-  margin-bottom: 15px;
+.footer-minimal {
+  width: 100vw;
+  background: #181818;
   color: #fff;
-  font-weight: 600;
-}
-
-/* Logo 区域 */
-.footer-logo {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.footer-logo img {
-  height: 28px;
-  width: auto;
-}
-
-.footer-description {
-  color: #ccc;
-  line-height: 1.6;
-  font-size: 0.95rem;
-}
-
-/* 链接列表 */
-.footer-links {
-  list-style: none;
-  margin: 0;
+  position: relative;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
   padding: 0;
-}
-
-.footer-links li {
-  margin-bottom: 10px;
-}
-
-.footer-links a {
-  color: #ccc;
-  text-decoration: none;
-  transition: color 0.3s ease;
-  font-size: 0.95rem;
-}
-
-.footer-links a:hover {
-  color: #667eea;
-}
-
-/* 联系信息 */
-.contact-info {
+  min-height: 56px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  align-items: center;
+  justify-content: flex-end;
+}
+.footer-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+  margin-bottom: 0;
+}
+.footer-copyright {
+  font-size: 0.93rem;
+  color: rgba(255,255,255,0.55);
+  margin: 16px 0 10px 0;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-family: 'SF Pro', 'Helvetica Neue', Arial, sans-serif;
+  text-align: center;
 }
 
-.contact-item {
+/* 联系我们 极简美化 */
+.contact {
+  padding: 120px 0 80px 0;
+  background: #181818;
+  color: #fff;
+}
+.contact-row {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  max-width: 900px;
+  margin: 0 auto;
+  gap: 0;
+  position: relative;
+}
+.contact-left {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-right: 40px;
+}
+.contact-left h2 {
+  font-size: 2.6rem;
+  font-weight: 800;
+  margin-bottom: 18px;
+  color: #fff;
+  letter-spacing: 1px;
+  line-height: 1.1;
+}
+.contact-left p {
+  font-size: 1.15rem;
+  color: #bdbdbd;
+  font-weight: 400;
+  margin-bottom: 0;
+  margin-top: 6px;
+}
+.contact-divider {
+  width: 1px;
+  background: rgba(255,255,255,0.10);
+  margin: 0 40px;
+  min-height: 120px;
+  align-self: center;
+}
+.contact-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
+  padding-left: 40px;
+}
+.contact-label {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+.contact-info-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: #ccc;
-  font-size: 0.95rem;
+  gap: 12px;
+  font-size: 1.18rem;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 0;
+  letter-spacing: 1px;
 }
-
-.contact-icon {
-  font-size: 1.1rem;
-  min-width: 20px;
-}
-
-/* 底部版权区域 */
-.footer-bottom {
-  border-top: 1px solid #333;
-  padding-top: 20px;
-}
-
-.footer-bottom-content {
+.contact-info-row .icon {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
 }
-
-.footer-bottom p {
-  color: #999;
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-.social-links {
-  display: flex;
-  gap: 20px;
-}
-
-.social-link {
-  color: #ccc;
-  text-decoration: none;
-  font-size: 0.9rem;
-  transition: color 0.3s ease;
-}
-
-.social-link:hover {
-  color: #667eea;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .footer {
-    padding: 40px 0 20px;
-  }
-
-  .footer-content {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-
-  .footer-bottom-content {
+@media (max-width: 900px) {
+  .contact-row {
     flex-direction: column;
-    text-align: center;
+    gap: 32px;
+    align-items: stretch;
+    max-width: 98vw;
   }
-
-  .social-links {
-    justify-content: center;
+  .contact-left, .contact-right {
+    align-items: flex-start;
+    padding: 0;
   }
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 0 15px;
+  .contact-left h2 {
+    font-size: 2rem;
   }
-
-  .footer-logo img {
-    height: 25px;
+  .contact-left p, .contact-info-row {
+    font-size: 1rem;
+  }
+  .contact-label {
+    font-size: 0.98rem;
+  }
+  .contact-divider {
+    display: none;
+  }
+  .contact-right {
+    gap: 18px;
+    padding: 0;
   }
 }
 </style>

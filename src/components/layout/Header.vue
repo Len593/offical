@@ -12,7 +12,7 @@
           <ul class="nav-list">
             <li><div class="nav-link" :class="{active: activeSection==='/'}" @click="toPath('/')">Início</div></li>
             <li><div class="nav-link" :class="{active: activeSection==='/about'}" @click="toPath('/about')">Sobre</div></li>
-            <li><div class="nav-link" :class="{active: activeSection==='/services'}" @click="toPath('/services')">Serviços</div></li>
+            <li><div class="nav-link" :class="{active: activeSection==='/service'}" @click="toPath('/service')">Serviços</div></li>
           </ul>
         </nav>
 
@@ -28,7 +28,7 @@
         <ul class="nav-mobile-list">
           <li><div class="nav-mobile-link" :class="{active: activeSection==='/'}" @click="toPath('/')">Início</div></li>
           <li><div class="nav-mobile-link" :class="{active: activeSection==='/about'}" @click="toPath('/about')">Sobre</div></li>
-          <li><div class="nav-mobile-link" :class="{active: activeSection==='/services'}" @click="toPath('/services')">Serviços</div></li>
+          <li><div class="nav-mobile-link" :class="{active: activeSection==='/service'}" @click="toPath('/service')">Serviços</div></li>
         </ul>
       </nav>
     </div>

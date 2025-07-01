@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <img class="testimonials-img" src="@/assets/img/6.avif" alt="testimonials" />
     <!-- 英雄区域 -->
     <section class="hero">
         <video src="@/assets/img/11.mp4" autoplay muted loop class="hero-video"></video>
@@ -82,22 +83,25 @@
     </section>
 
     <!-- 客户评价 -->
-    <section class="testimonials">
-      <div class="container">
-        <div class="testimonials-grid">
-          <div class="testimonial-card">
+    <section class="testimonials-section">
+      <div class="testimonials-bg"></div>
+      <div class="testimonials-center">
+        <div class="testimonials-content">
+          <div class="testimonial">
             <div class="stars">★★★★★</div>
-            <p>"A Hit Invest Capital transformou minha visão sobre investimentos. Profissionalismo e credibilidade em cada passo."</p>
-            <div class="client-info">
-              <h4>Jorge Manfredini</h4>
+            <div class="testimonial-text">
+              A Hit Invest Capital transformou minha visão sobre investimentos. Profissionalismo e credibilidade em cada passo.
             </div>
+            <img class="testimonial-avatar" src="@/assets/img/6.avif" alt="Jorge Manfredini" />
+            <div class="testimonial-name">Jorge Manfredini</div>
           </div>
-          <div class="testimonial-card">
+          <div class="testimonial">
             <div class="stars">★★★★★</div>
-            <p>"Excelente equipe! A Hit Invest Capital me ajudou a alcançar meus objetivos financeiros com segurança e confiança."</p>
-            <div class="client-info">
-              <h4>Ana Alencar</h4>
+            <div class="testimonial-text">
+              Excelente equipe! A Hit Invest Capital me ajudou a alcançar meus objetivos financeiros com segurança e confiança.
             </div>
+            <img class="testimonial-avatar" src="@/assets/img/6.avif" alt="Ana Alencar" />
+            <div class="testimonial-name">Ana Alencar</div>
           </div>
         </div>
       </div>
@@ -429,14 +433,14 @@ onMounted(() => {
 
 .services-content {
   display: flex;
-  gap: 48px;
+  gap: 60px;
   align-items: flex-start;
   justify-content: center;
   margin-bottom: 40px;
 }
 
 .services-img {
-  width: 480px;
+  width: 560px;
   max-width: 100%;
   border-radius: 28px;
   object-fit: cover;
@@ -479,44 +483,84 @@ onMounted(() => {
 }
 
 /* 客户评价 */
-.testimonials {
-  padding: 80px 0;
-  background: white;
+.testimonials-section {
+  position: relative;
+  min-height: 380px;
+  width: 100%;
+  overflow: hidden;
 }
-
-.testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 40px;
+.testimonials-bg {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('@/assets/img/testimonials-bg.jpg') center center / cover no-repeat fixed;
+  z-index: 1;
 }
-
-.testimonial-card {
-  background: white;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-  border: 1px solid #f0f0f0;
+.testimonials-center {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 380px;
+  padding: 60px;
+  background: transparent;
 }
-
+.testimonials-img{
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+      padding: 40px 60px;
+}
+.testimonials-content {
+  display: flex;
+  gap: 10vw;
+  border-radius: 22px;
+}
+.testimonial {
+  width: 380px;
+  max-width: 90vw;
+  text-align: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .stars {
-  color: #ffd700;
-  font-size: 1.3rem;
-  margin-bottom: 20px;
+  font-size: 1.7rem;
+  margin-bottom: 18px;
+  letter-spacing: 2px;
 }
-
-.testimonial-card p {
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #666;
-  margin-bottom: 25px;
-  font-style: italic;
+.testimonial-text {
+  font-size: 1.13rem;
+  line-height: 1.6;
+  margin-bottom: 28px;
+  font-weight: 400;
 }
-
-.client-info h4 {
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 0;
-  font-weight: 600;
+.testimonial-avatar {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  border: 2px solid #fff;
+}
+.testimonial-name {
+  font-size: 1.08rem;
+  font-weight: 400;
+}
+@media (max-width: 900px) {
+  .testimonials-content {
+    flex-direction: column;
+    gap: 32px;
+    padding: 30px 10px;
+  }
+  .testimonial {
+    width: 95vw;
+  }
 }
 
 /* 项目展示 */

@@ -30,13 +30,13 @@
     <!-- 客户评价区 -->
     <section class="sobre-testimonial scroll-fade-up">
       <div class="testimonial-inner">
-        <div class="testimonial-stars">★★★★★</div>
-        <div class="testimonial-text">
+        <div class="testimonial-stars scroll-fade-up">★★★★★</div>
+        <div class="testimonial-text scroll-fade-up">
           A Hit Invest Capital me proporcionou segurança e confiança em meus investimentos, me ajudando a entender melhor o mercado financeiro. Recomendo a equipe experiente!
         </div>
         <div class="testimonial-user">
-          <img class="testimonial-avatar" src="@/assets/img/1.avif" alt="Lucas Barone" />
-          <div class="testimonial-author">Lucas Barone</div>
+          <img class="testimonial-avatar scroll-fade-up" src="@/assets/img/1.avif" alt="Lucas Barone" />
+          <div class="testimonial-author scroll-fade-up">Lucas Barone</div>
         </div>
       </div>
     </section>
@@ -44,38 +44,10 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { useSimpleScrollAnimation } from '@/composables/useScrollAnimation'
 
-onMounted(() => {
-  // 添加滚动动画
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in')
-        observer.unobserve(entry.target)
-      }
-    })
-  }, observerOptions)
-
-  // 观察所有需要动画的元素
-  const animateElements = document.querySelectorAll('.scroll-fade-up')
-  animateElements.forEach(el => observer.observe(el))
-
-  // 如果一开始就在视口内，直接加动画
-  setTimeout(() => {
-    animateElements.forEach(el => {
-      const rect = el.getBoundingClientRect()
-      if (rect.top < window.innerHeight) {
-        el.classList.add('animate-in')
-      }
-    })
-  }, 300)
-})
+// 使用简化的滚动动画
+useSimpleScrollAnimation()
 </script>
 
 <style scoped>
@@ -266,15 +238,114 @@ onMounted(() => {
 }
 @media (max-width: 900px) {
   .sobre-hero-content {
-    flex-direction: column;
-    gap: 36px;
-    align-items: stretch;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    padding: 0 15px;
+  }
+  .hero-left {
+    text-align: center;
+  }
+  .hero-title {
+    font-size: 2.2rem;
+    margin-bottom: 24px;
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    margin-bottom: 32px;
   }
   .hero-right {
     align-items: center;
   }
   .hero-img-wrap {
     max-width: 100%;
+  }
+  .hero-quote-card {
+    left: 15px;
+    bottom: 30px;
+    width: 85%;
+    padding: 18px 24px 16px 24px;
+  }
+  .quote-text {
+    font-size: 1.05rem;
+  }
+  .quote-author {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .sobre-hero-intro {
+    padding: 100px 15px 30px 15px;
+  }
+  .sobre-hero-content {
+    gap: 50px;
+  }
+  .hero-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  .hero-desc {
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+  .hero-btn {
+    padding: 10px 32px;
+    font-size: 1rem;
+  }
+  .hero-quote-card {
+    left: 10px;
+    bottom: 25px;
+    width: 80%;
+    padding: 16px 20px 14px 20px;
+  }
+  .quote-icon {
+    font-size: 1.8rem;
+  }
+  .quote-text {
+    font-size: 1rem;
+  }
+  .quote-author {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .sobre-hero-intro {
+    padding: 80px 10px 20px 10px;
+  }
+  .sobre-hero-content {
+    gap: 40px;
+    padding: 0 10px;
+  }
+  .hero-title {
+    font-size: 1.8rem;
+    margin-bottom: 18px;
+  }
+  .hero-desc {
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+  .hero-btn {
+    padding: 8px 28px;
+    font-size: 0.95rem;
+  }
+  .hero-quote-card {
+    position: relative;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    width: 100%;
+    margin-top: 20px;
+    padding: 20px;
+  }
+  .quote-icon {
+    font-size: 1.6rem;
+  }
+  .quote-text {
+    font-size: 0.95rem;
+  }
+  .quote-author {
+    font-size: 0.85rem;
   }
 }
 @media (max-width: 600px) {
@@ -286,14 +357,33 @@ onMounted(() => {
     font-size: 1.3rem;
     margin-bottom: 18px;
   }
+  .sobre-testimonial {
+    padding: 60px 15px 40px 15px;
+  }
+  .testimonial-inner {
+    padding: 0 10px;
+  }
 }
-.scroll-fade-up {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+
+@media (max-width: 480px) {
+  .sobre-testimonial {
+    padding: 50px 10px 30px 10px;
+  }
+  .testimonial-text {
+    font-size: 1rem;
+    margin-bottom: 28px;
+  }
+  .testimonial-stars {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+  .testimonial-avatar {
+    width: 56px;
+    height: 56px;
+  }
+  .testimonial-author {
+    font-size: 1.1rem;
+  }
 }
-.animate-in {
-  opacity: 1 !important;
-  transform: none !important;
-}
+/* 动画样式现在由全局系统管理 */
 </style> 

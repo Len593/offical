@@ -14,58 +14,33 @@
               <span class="icon scroll-fade-up">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" rx="4" fill="none"/><path d="M3.5 6.5L10 11.5L16.5 6.5" stroke="#c49a6c" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="3.5" y="6.5" width="13" height="7" rx="2" stroke="#c49a6c" stroke-width="1.5"/></svg>
               </span>
-              hitinvestcapital@outlook.com
+              <span class="scroll-fade-up">hitinvestcapital@outlook.com</span>
             </div>
             <div class="contact-info-row scroll-fade-up">
               <span class="icon scroll-fade-up">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="20" height="20" rx="4" fill="none"/><path d="M6.5 4.5C6.5 3.94772 6.94772 3.5 7.5 3.5H12.5C13.0523 3.5 13.5 3.94772 13.5 4.5V5.5C13.5 6.05228 13.0523 6.5 12.5 6.5H7.5C6.94772 6.5 6.5 6.05228 6.5 5.5V4.5Z" stroke="#c49a6c" stroke-width="1.5"/><path d="M10 13.5V15.5" stroke="#c49a6c" stroke-width="1.5" stroke-linecap="round"/><path d="M7.5 6.5V15.5C7.5 16.0523 7.94772 16.5 8.5 16.5H11.5C12.0523 16.5 12.5 16.0523 12.5 15.5V6.5" stroke="#c49a6c" stroke-width="1.5"/></svg>
               </span>
-              (11) 98715-1324
+              <span class="scroll-fade-up">(11) 98715-1324</span>
             </div>
           </div>
         </div>
       </div>
     </section>
   <footer class="footer-minimal scroll-fade-up">
-    <div class="footer-divider"></div>
-    <div class="footer-copyright">© 2020. All rights reserved.</div>
+    <div class="footer-divider scroll-fade-up"></div>
+    <div class="footer-copyright scroll-fade-up">© 2020. All rights reserved.</div>
   </footer>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { useSimpleScrollAnimation } from '@/composables/useScrollAnimation'
 
-onMounted(() => {
-  // 添加滚动动画
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in')
-      }
-    })
-  }, observerOptions)
-
-  // 观察所有需要动画的元素
-  const animateElements = document.querySelectorAll('.scroll-fade-up')
-  animateElements.forEach(el => observer.observe(el))
-})
+// 使用简化的滚动动画
+useSimpleScrollAnimation()
 </script>
 
 <style>
-.scroll-fade-up {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.animate-in {
-  opacity: 1 !important;
-  transform: none !important;
-}
+/* 动画样式现在由全局系统管理 */
 
 .footer-minimal {
   width: 100vw;
@@ -100,7 +75,7 @@ onMounted(() => {
 
 /* 联系我们 极简美化 */
 .contact {
-  padding: 120px 0 80px 0;
+  padding: 120px 20px 80px 20px;
   background: #181818;
   color: #fff;
 }

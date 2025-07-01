@@ -141,27 +141,10 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { useSimpleScrollAnimation } from '@/composables/useScrollAnimation'
 
-onMounted(() => {
-  // 添加滚动动画
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate-in')
-      }
-    })
-  }, observerOptions)
-
-  // 观察所有需要动画的元素
-  const animateElements = document.querySelectorAll('.scroll-fade-up')
-  animateElements.forEach(el => observer.observe(el))
-})
+// 使用简化的滚动动画
+useSimpleScrollAnimation()
 </script>
 
 <style scoped>
@@ -635,13 +618,5 @@ onMounted(() => {
   }
 }
 
-.scroll-fade-up {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.animate-in {
-  opacity: 1 !important;
-  transform: none !important;
-}
+/* 动画样式现在由全局系统管理 */
 </style>
